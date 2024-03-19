@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class PagListaVehiculosComponent implements OnInit {
 
   mostrarImagen= true;
+  filtro:string="";
   constructor() { }
 
   ngOnInit() {
