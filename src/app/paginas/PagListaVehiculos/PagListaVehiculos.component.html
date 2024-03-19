@@ -16,7 +16,11 @@
           <thead>
             <tr>
               <th>
-                <button class="btn btn-success btn-xs" (click)="mostrar()">Mostrar imagen</button>
+                <button class="btn btn-xs"
+                [ngClass]="{'btn-success':mostrarImagen,'btn-warning':!mostrarImagen }"
+                (click)="mostrar()">
+                {{mostrarImagen ? 'Mostrar':'Ocultar'}} Imagen
+              </button>
               </th>
               <th>MARCA</th>
               <th>MODELO</th>
@@ -31,11 +35,11 @@
             <tr *ngFor="let item of listaVehiculos">
               <td><img [src]="item.foto" *ngIf="this.mostrarImagen"></td>
               <td>{{item.marca}}</td>
-              <td>{{item.modelo}}</td>
+              <td>{{item.modelo }}</td>
               <td [innerText]="item.anio"></td>
               <td>{{item.color}}</td>
               <td>{{item.kilometraje}}</td>
-              <td>{{item.precio}}</td>
+              <td>{{item.precio |currency}}</td>
               <td>{{item.calificacion}}</td>
             </tr>
 
