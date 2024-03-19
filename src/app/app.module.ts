@@ -4,17 +4,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PagListaVehiculosComponent } from './paginas/PagListaVehiculos/PagListaVehiculos.component';
+import { PaginaModule } from './paginas/PaginaModule';
+
 
 @NgModule({
   declarations: [
     AppComponent,
       NavbarComponent,
-      PagListaVehiculosComponent
+
    ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PaginaModule
   ],
   providers: [],
   bootstrap: [AppComponent]
