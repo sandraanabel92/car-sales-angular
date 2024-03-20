@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-PagListaVehiculos',
@@ -9,6 +9,9 @@ export class PagListaVehiculosComponent implements OnInit {
 
   mostrarImagen= true;
   filtro:string="";
+
+  @Input() valor:string ='';
+
   constructor() { }
 
   ngOnInit() {
@@ -16,6 +19,12 @@ export class PagListaVehiculosComponent implements OnInit {
   mostrar(){
     this.mostrarImagen = !this.mostrarImagen
   }
+
+  recepcion(dato:number){
+    console.log('Dato:',dato);
+
+  }
+
   public listaVehiculos: Array<any> = [
     {"codigo": "A001","marca":"Chevrolet","modelo":"Sail","anio":"2023","color":"Azul","kilometraje":"50000","precio":"17000","foto":"https://cdn.wheel-size.com/thumbs/ec/f6/ecf621fed78cb8c359014c36565c8996.jpg","calificacion":3},
     {"codigo": "A002","marca":"Hyundai","modelo":"Creta","anio":"2022","color":"Blanco","kilometraje":"41000","precio":"21999","foto":"https://acroadtrip.blob.core.windows.net/catalogo-imagenes/s/RT_V_952fec4786af4f06acb20a7997d0ebae.jpg","calificacion":4},

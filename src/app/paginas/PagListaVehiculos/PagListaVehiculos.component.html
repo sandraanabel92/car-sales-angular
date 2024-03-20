@@ -26,7 +26,7 @@
                 <button class="btn btn-xs"
                 [ngClass]="{'btn-success':mostrarImagen,'btn-warning':!mostrarImagen }"
                 (click)="mostrar()">
-                {{mostrarImagen ? 'Mostrar':'Ocultar'}} Imagen
+                {{mostrarImagen ? 'Ocultar':'Mostrar'}} Imagen
               </button>
               </th>
               <th>MARCA</th>
@@ -47,7 +47,9 @@
               <td>{{item.color}}</td>
               <td>{{item.kilometraje}}</td>
               <td>{{item.precio |currency}}</td>
-              <td>{{item.calificacion}}</td>
+              <td>
+                <app-calificacion [calificacion]="item.calificacion" (accionClick)="recepcion($event)"></app-calificacion>
+              </td>
             </tr>
 
           </tbody>

@@ -1,13 +1,19 @@
 import { NgModule } from "@angular/core";
 import {AEspacioPipe} from "./pipes/AEspacio.pipe";
+import { CalificacionComponent } from "./componentes/calificacion/calificacion.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   declarations:[
-    AEspacioPipe
+    AEspacioPipe,
+    CalificacionComponent
   ],
-  imports:[],
+  imports:[
+   CommonModule
+  ],
   exports:[
-    AEspacioPipe
+    AEspacioPipe,
+    CalificacionComponent
   ]
 
 
