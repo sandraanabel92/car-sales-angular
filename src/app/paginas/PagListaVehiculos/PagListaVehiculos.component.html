@@ -42,7 +42,7 @@
             <tr *ngFor="let item of listaVehiculos">
               <td><img [src]="item.foto" *ngIf="this.mostrarImagen"></td>
               <td>{{item.marca}}</td>
-              <td>{{item.modelo  |lowercase}}</td>
+              <td>{{item.modelo  |lowercase |aEspacio:'-'}}</td>
               <td [innerText]="item.anio"></td>
               <td>{{item.color}}</td>
               <td>{{item.kilometraje}}</td>
