@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './paginas/home/home.component';
 import { PagListaVehiculosComponent } from './paginas/PagListaVehiculos/PagListaVehiculos.component';
+import { PageNotFoundComponent } from './paginas/home/PagNotFound/PageNotFound.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,7 @@ const routes: Routes = [
   },
   {
     path:"**",
-    component: HomeComponent,
+    component: PageNotFoundComponent,
     pathMatch: "full"
   }
 ];
