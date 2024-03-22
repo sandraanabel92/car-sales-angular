@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Vehiculo } from '../utilitarios/modelos/Vehiculo';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,15 @@ getVehiculos(){
   return this.listaVehiculos;
 }
 
-getvehiculo(codigo:string): Vehiculo|undefined{
-  let vehiculo = this.listaVehiculos.find(ele => ele.codigo ===codigo);
-  return vehiculo;
+getvehiculo(codigo:string): Observable<Vehiculo|undefined>{
+  const escucha: Observable<Vehiculo|undefined> = new Observable(escuchando =>{
+    setTimeout( () =>{
+      let vehiculo = this.listaVehiculos.find(ele => ele.codigo ===codigo);
+      escuchando.next(vehiculo);
+    },300);
+
+  });
+   return escucha;
 
 }
 addvehiculo(vehiculo:Vehiculo){
