@@ -29,6 +29,7 @@
                 {{mostrarImagen ? 'Ocultar':'Mostrar'}} Imagen
               </button>
               </th>
+              <th>CODIGO</th>
               <th>MARCA</th>
               <th>MODELO</th>
               <th>AÑO</th>
@@ -41,6 +42,9 @@
           <tbody>
             <tr *ngFor="let item of listaVehiculos">
               <td><img [src]="item.foto" *ngIf="this.mostrarImagen"></td>
+              <td>
+                <a [routerLink]="['/vehiculo/'+item.codigo]">{{item.codigo}}</a>
+              </td>
               <td>{{item.marca}}</td>
               <td>{{item.modelo  |lowercase |aEspacio:'-'}}</td>
               <td [innerText]="item.anio"></td>

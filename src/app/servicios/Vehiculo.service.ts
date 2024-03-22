@@ -12,6 +12,16 @@ getVehiculos(){
   return this.listaVehiculos;
 }
 
+getvehiculo(codigo:string): Vehiculo|undefined{
+  let vehiculo = this.listaVehiculos.find(ele => ele.codigo ===codigo);
+  return vehiculo;
+
+}
+addvehiculo(vehiculo:Vehiculo){
+  this.listaVehiculos.push(vehiculo);
+
+}
+
 private listaVehiculos: Array<Vehiculo> = [
   {"codigo": "A001","marca":"Chevrolet","modelo":"Sail","anio":2023,"color":"Azul","kilometraje":"50000","precio":17000,"foto":"https://cdn.wheel-size.com/thumbs/ec/f6/ecf621fed78cb8c359014c36565c8996.jpg","calificacion":3},
   {"codigo": "A002","marca":"Hyundai","modelo":"Creta","anio":2022,"color":"Blanco","kilometraje":"41000","precio":21999,"foto":"https://acroadtrip.blob.core.windows.net/catalogo-imagenes/s/RT_V_952fec4786af4f06acb20a7997d0ebae.jpg","calificacion":4},

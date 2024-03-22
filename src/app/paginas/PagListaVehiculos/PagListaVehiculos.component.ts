@@ -22,7 +22,9 @@ export class PagListaVehiculosComponent implements OnInit {
 
   ngOnInit() {
     this.listaVehiculos = this.vehiculoService.getVehiculos();
+
   }
+
   mostrar(){
     this.mostrarImagen = !this.mostrarImagen
   }
