@@ -1,0 +1,19 @@
+.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.Bienvenida {
+  color: #FFD700; /* Cambia esto por el color que prefieras para el texto */
+  background-color: #000080; /* Cambia esto por el color que prefieras para el fondo */
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+img {
+  max-width: 100%; /* Hace que la imagen sea responsive */
+  height: auto;
+}
