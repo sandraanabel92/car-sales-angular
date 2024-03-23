@@ -1,8 +1,8 @@
 export interface Vehiculo{
   codigo: string;
-  marca?: string;
+  marca: string;
   color?: string;
-  modelo?: string;
+  modelo: string;
   kilometraje?: string;
   precio?: number;
   foto?: string | null;

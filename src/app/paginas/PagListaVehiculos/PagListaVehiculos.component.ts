@@ -21,12 +21,18 @@ export class PagListaVehiculosComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.listaVehiculos = this.vehiculoService.getVehiculos();
+    this.consultaVehiculos();
 
   }
 
   mostrar(){
     this.mostrarImagen = !this.mostrarImagen
+  }
+
+  consultaVehiculos(){
+    this.vehiculoService.getVehiculos(this.filtro).subscribe(data =>{
+      this.listaVehiculos = data;
+    });
   }
 
   recepcion(dato:number){
