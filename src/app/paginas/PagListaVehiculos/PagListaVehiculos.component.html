@@ -1,39 +1,36 @@
 <div class="card">
-  <div class="card-header">
+  <div class="card-header bg-primary text-white">
     LISTA DE VEHICULOS
   </div>
 
   <div class="card-body">
     <div class="row">
       <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Filtrar por:</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Marca"
-        [(ngModel)]="filtro">
+        <label for="exampleFormControlInput1" class="form-label">Filtro:</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Marca" [(ngModel)]="filtro">
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
       <div class="col-12">
-        Filtrado por: {{filtro}}
+        Filtrado por: <span class="fw-bold">{{filtro}}</span>
       </div>
     </div>
     <br>
-    <div class="row">
-      <div class="col-2">
-        <a [routerLink]="['/vehiculo']" class="btn btn-info">NUEVO</a>
+    <div class="row mb-3">
+      <div class="col">
+        <a [routerLink]="['/vehiculo']" class="btn btn-outline-info">NUEVO</a>
       </div>
-     </div>
+    </div>
      <br>
     <div class="row">
       <div class="col-sm-12">
-        <table class="table table-dark">
+        <table class="table table-responsive table-striped table-hover">
           <thead>
             <tr>
               <th>
-                <button class="btn btn-xs"
-                [ngClass]="{'btn-success':mostrarImagen,'btn-warning':!mostrarImagen }"
-                (click)="mostrar()">
-                {{mostrarImagen ? 'Ocultar':'Mostrar'}} Imagen
-              </button>
+                <button class="btn btn-success btn-sm" (click)="mostrar()">
+                  <i class="bi bi-eye{{mostrarImagen ? '-slash' : ''}}"></i> {{mostrarImagen ? 'Ocultar':'Mostrar'}} Imagen
+                </button>
               </th>
               <th>CODIGO</th>
               <th>MARCA</th>
@@ -43,6 +40,7 @@
               <th>KILOMETRAJE</th>
               <th>PRECIO</th>
               <th>CALIFICACION</th>
+              <th colspan="2">OPCIONES</th>
             </tr>
           </thead>
           <tbody>
@@ -59,6 +57,16 @@
               <td>{{item.precio |currency}}</td>
               <td>
                 <app-calificacion [calificacion]="item.calificacion" (accionClick)="recepcion($event)"></app-calificacion>
+              </td>
+              <td>
+                <button (click)="editarVehiculo(item.codigo)" class="btn btn-warning btn-sm">
+                  <i class="bi bi-pencil-square"></i> Editar
+                </button>
+              </td>
+              <td>
+                <button (click)="eliminarVehiculo(item.codigo)" class="btn btn-danger btn-sm">
+                  <i class="bi bi-trash"></i> Eliminar
+                </button>
               </td>
             </tr>
 

@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import { Vehiculo } from '../utilitarios/modelos/Vehiculo';
-import { Observable, elementAt } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Vehiculo} from '../utilitarios/modelos/Vehiculo';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,27 +11,57 @@ constructor() { }
 
 getVehiculos(filtro:any):Observable<Array<Vehiculo>>{
   const escucha: Observable<Array<Vehiculo>> = new Observable(escuchando =>{
-  let lista = this.listaVehiculos.filter( elem => elem.marca.toLowerCase().includes(filtro.toLowerCase()))
+    if(filtro === ''){
+      escuchando.next(this.listaVehiculos);
+      return;
+    }
+  let lista = this.listaVehiculos.filter( elem => elem.marca.toLowerCase() === filtro.toLowerCase())
     escuchando.next(lista);
   });
   return escucha;
 }
 
 getvehiculo(codigo:string): Observable<Vehiculo|undefined>{
-  const escucha: Observable<Vehiculo|undefined> = new Observable(escuchando =>{
-    setTimeout( () =>{
-      let vehiculo = this.listaVehiculos.find(ele => ele.codigo ===codigo);
-      escuchando.next(vehiculo);
-    },300);
-
-  });
-   return escucha;
+  return new Observable(escuchando => {
+     setTimeout(() => {
+       let vehiculo = this.listaVehiculos.find(ele => ele.codigo === codigo);
+       escuchando.next(vehiculo);
+     }, 300);
+   });
 
 }
 addvehiculo(vehiculo:Vehiculo){
   this.listaVehiculos.push(vehiculo);
 
 }
+
+  eliminarVehiculo(codigo: string): Observable<void> {
+    return new Observable(escuchando => {
+      setTimeout(() => {
+        this.eliminarVehiculosLista(codigo);
+        escuchando.next();
+      }, 300);
+    });
+  }
+
+  private eliminarVehiculosLista(codigo: string): void {
+    this.listaVehiculos = this.listaVehiculos.filter(vehiculo => vehiculo.codigo !== codigo);
+  }
+
+  actualizarVehiculo(vehiculo: Vehiculo): Observable<Vehiculo> {
+    return new Observable(escuchando => {
+      setTimeout(() => {
+        this.actualizarVehiculoLista(vehiculo);
+        escuchando.next(vehiculo);
+      }, 300);
+    });
+  }
+
+  private actualizarVehiculoLista(vehiculo: Vehiculo): void {
+    const index = this.listaVehiculos.findIndex(v => v.codigo === vehiculo.codigo);
+    this.listaVehiculos[index] = vehiculo;
+
+  }
 
 private listaVehiculos: Array<Vehiculo> = [
   {"codigo": "A001","marca":"Chevrolet","modelo":"Sail","anio":2023,"color":"Azul","kilometraje":"50000","precio":17000,"foto":"https://cdn.wheel-size.com/thumbs/ec/f6/ecf621fed78cb8c359014c36565c8996.jpg","calificacion":3},

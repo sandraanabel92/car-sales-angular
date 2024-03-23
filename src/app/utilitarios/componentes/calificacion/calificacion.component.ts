@@ -5,35 +5,14 @@ import { Component, EventEmitter, Input,OnChanges, OnInit, Output, SimpleChanges
   templateUrl: './calificacion.component.html',
   styleUrls: ['./calificacion.component.css']
 })
-export class CalificacionComponent implements OnInit, OnChanges {
-
-  @Input() calificacion:any = 0;
-
-  @Output() accionClick = new EventEmitter<any>();
-  lista:Array<any> = [];
-
+export class CalificacionComponent {
+  @Input() modoEditar: boolean = false;
+  @Input() calificacion: number = 0;
+  @Output() accionClick = new EventEmitter<number>();
 
   constructor() { }
 
-  ngOnInit() {
-    this.generar();
-  }
-
- ngOnChanges(changes: SimpleChanges): void {
-  if(changes['calificacion'].currentValue){
-    this.generar();
-
-  }
-
- }
-  generar(){
-    for(let i=0; i<this.calificacion; i++){
-      this.lista.push(1);
-    }
-  }
-
-  select(){
+  select() {
     this.accionClick.emit(this.calificacion);
   }
-
 }

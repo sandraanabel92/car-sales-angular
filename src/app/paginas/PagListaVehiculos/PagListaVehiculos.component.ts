@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { VehiculoService } from '../../servicios/Vehiculo.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-PagListaVehiculos',
@@ -29,6 +29,7 @@ export class PagListaVehiculosComponent implements OnInit {
 
   constructor(
     private vehiculoService: VehiculoService,
+    private router: Router,
 
   ) {
 
@@ -54,5 +55,20 @@ export class PagListaVehiculosComponent implements OnInit {
 
   }
 
+  editarVehiculo(codigo: string) {
+    this.router.navigate(['/vehiculo', codigo], { queryParams: { modo: 'editar' } });
+  }
+
+  eliminarVehiculo(codigo: string) {
+    if (confirm('¿Estás seguro de querer eliminar este vehículo?')) {
+      this.vehiculoService.eliminarVehiculo(codigo).subscribe(() => {
+        alert('Vehículo eliminado correctamente');
+        this.consultaVehiculos(); // Recargar la lista de vehículos
+      }, error => {
+        console.error('Error al eliminar el vehículo:', error);
+        alert('Ocurrió un error al eliminar el vehículo.');
+      });
+    }
+  }
 
 }

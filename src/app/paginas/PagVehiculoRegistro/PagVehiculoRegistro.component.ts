@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vehiculo } from '../../utilitarios/modelos/Vehiculo';
 import { VehiculoService } from '../../servicios/Vehiculo.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-PagVehiculoRegistro',
@@ -15,7 +16,8 @@ export class PagVehiculoRegistroComponent implements OnInit {
 
   constructor(
     private vehiculoServicio: VehiculoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router,
   ) {
 
 
@@ -38,6 +40,7 @@ export class PagVehiculoRegistroComponent implements OnInit {
     let vehiculo:Vehiculo = {...this.formulario.value};
     this.vehiculoServicio.addvehiculo(vehiculo);
     console.log('Formulario',this.formulario.value);
+    this.router.navigate(['/vehiculos']);
   }
 
 }

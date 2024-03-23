@@ -1,5 +1,6 @@
-<div (click)="select()">
-  <div class="d-inline" *ngFor="let item of lista">
-    *
-  </div>
- </div>
+<!-- Componente CalificacionComponent -->
+<div *ngIf="!modoEditar" (click)="select()">
+  <span *ngFor="let star of [].constructor(calificacion || 0); let i = index">★</span>
+</div>
+<input *ngIf="modoEditar" type="number" [(ngModel)]="calificacion" (change)="accionClick.emit(calificacion)" class="form-control" />
+
