@@ -1,76 +1,45 @@
 import {Injectable} from '@angular/core';
 import {Vehiculo} from '../utilitarios/modelos/Vehiculo';
 import {Observable} from 'rxjs';
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehiculoService {
 
-constructor() { }
+  private apiUrl = 'http://epico.gob.ec/vehiculo/public/api';
 
-getVehiculos(filtro:any):Observable<Array<Vehiculo>>{
-  const escucha: Observable<Array<Vehiculo>> = new Observable(escuchando =>{
-    if(filtro === ''){
-      escuchando.next(this.listaVehiculos);
-      return;
-    }
-  let lista = this.listaVehiculos.filter( elem => elem.marca.toLowerCase() === filtro.toLowerCase())
-    escuchando.next(lista);
-  });
-  return escucha;
-}
-
-getvehiculo(codigo:string): Observable<Vehiculo|undefined>{
-  return new Observable(escuchando => {
-     setTimeout(() => {
-       let vehiculo = this.listaVehiculos.find(ele => ele.codigo === codigo);
-       escuchando.next(vehiculo);
-     }, 300);
-   });
-
-}
-addvehiculo(vehiculo:Vehiculo){
-  this.listaVehiculos.push(vehiculo);
-
-}
-
-  eliminarVehiculo(codigo: string): Observable<void> {
-    return new Observable(escuchando => {
-      setTimeout(() => {
-        this.eliminarVehiculosLista(codigo);
-        escuchando.next();
-      }, 300);
-    });
+  constructor(private http: HttpClient) {
   }
 
-  private eliminarVehiculosLista(codigo: string): void {
-    this.listaVehiculos = this.listaVehiculos.filter(vehiculo => vehiculo.codigo !== codigo);
+  getVehiculos(pagina: number = 1, rows: number = 3, filtro: string = ''): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('page', pagina.toString());
+    params = params.append('rows', rows.toString());
+
+    if (filtro) {
+      params = params.append('filtro', filtro);
+    }
+
+    return this.http.get<any>(`${this.apiUrl}/vehiculos/`, {params});
+  }
+
+  getvehiculo(codigo: string): Observable<any | undefined> {
+    const url = `${this.apiUrl}/vehiculo/${codigo}`;
+    return this.http.get<any>(url);
+  }
+
+  addvehiculo(vehiculo: Vehiculo) {
+    return this.http.post<any>(`${this.apiUrl}/vehiculo/`, vehiculo);
+  }
+
+  eliminarVehiculo(codigo: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/vehiculo/${codigo}`);
   }
 
   actualizarVehiculo(vehiculo: Vehiculo): Observable<Vehiculo> {
-    return new Observable(escuchando => {
-      setTimeout(() => {
-        this.actualizarVehiculoLista(vehiculo);
-        escuchando.next(vehiculo);
-      }, 300);
-    });
+    return this.http.put<Vehiculo>(`${this.apiUrl}/vehiculo/${vehiculo.codigo}`, vehiculo);
   }
-
-  private actualizarVehiculoLista(vehiculo: Vehiculo): void {
-    const index = this.listaVehiculos.findIndex(v => v.codigo === vehiculo.codigo);
-    this.listaVehiculos[index] = vehiculo;
-
-  }
-
-private listaVehiculos: Array<Vehiculo> = [
-  {"codigo": "A001","marca":"Chevrolet","modelo":"Sail","anio":2023,"color":"Azul","kilometraje":"50000","precio":17000,"foto":"https://cdn.wheel-size.com/thumbs/ec/f6/ecf621fed78cb8c359014c36565c8996.jpg","calificacion":3},
-  {"codigo": "A002","marca":"Hyundai","modelo":"Creta","anio":2022,"color":"Blanco","kilometraje":"41000","precio":21999,"foto":"https://acroadtrip.blob.core.windows.net/catalogo-imagenes/s/RT_V_952fec4786af4f06acb20a7997d0ebae.jpg","calificacion":4},
-  {"codigo": "A003","marca":"Chevrolet","modelo":"Captiva","anio":2020,"color":"Negro","kilometraje":"31123","precio":23700,"foto":"https://www.motor.com.co/__export/1692896039941/sites/motor/img/2023/08/24/captiva1.png_554688468.png","calificacion":2},
-  {"codigo": "A004","marca":"Chery","modelo":"Tiggo - 2","anio":2022,"color":"Rojo","kilometraje":"16500","precio":12900,"foto":"https://www.maresacenter.com/hubfs/CHERY/Landings%20Lanzamientos/Tiggo%202%20Pro/WEB/tiggo-2-pro---menu.jpg","calificacion":1},
-  {"codigo": "A005","marca":"Hyundai","modelo":"Tucson","anio":2023,"color":"Negro","kilometraje":"19841 ","precio":30500,"foto":"https://www.autoasesor.com/hyundai/imagenes/tucson2023.jpg","calificacion":5},
-  {"codigo": "A006","marca":"Kia","modelo":"Sportage ","anio":2023,"color":"Blanco","kilometraje":"27000","precio":26000,"foto":"https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_58c0b68954894031be6ec39be4da528f.webp","calificacion":5},
-  {"codigo": "A007","marca":"Kia","modelo":"Sportage ","anio":2023,"color":"Blanco","kilometraje":"27000","precio":26000,"foto":"https://acroadtrip.blob.core.windows.net/catalogo-imagenes/m/RT_V_58c0b68954894031be6ec39be4da528f.webp","calificacion":3}
-]
 
 }

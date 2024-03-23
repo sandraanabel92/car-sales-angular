@@ -6,6 +6,8 @@ import { UtilitariosModule } from "../utilitarios/UtilitariosModule";
 import { PagVehiculoComponent } from "./PagVehiculo/PagVehiculo.component";
 import { RouterModule } from "@angular/router";
 import { PagVehiculoRegistroComponent } from "./PagVehiculoRegistro/PagVehiculoRegistro.component";
+import {HttpClientModule} from "@angular/common/http";
+import {ClienteRegistroComponent} from "./ClienteRegistro/ClienteRegistro.component";
 
 @NgModule({
   imports:[
@@ -13,17 +15,20 @@ import { PagVehiculoRegistroComponent } from "./PagVehiculoRegistro/PagVehiculoR
     FormsModule,
     UtilitariosModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   declarations:[
     PagListaVehiculosComponent,
     PagVehiculoComponent,
-    PagVehiculoRegistroComponent
+    PagVehiculoRegistroComponent,
+    ClienteRegistroComponent,
   ],
   exports:[
     PagListaVehiculosComponent,
     PagVehiculoComponent,
-    PagVehiculoRegistroComponent
+    PagVehiculoRegistroComponent,
+    ClienteRegistroComponent,
   ]
 })
 export class PaginaModule{

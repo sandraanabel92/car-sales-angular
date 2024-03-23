@@ -15,7 +15,6 @@ export class PagVehiculoComponent implements OnInit {
     marca: '',
     modelo: '',
     foto: '',
-    color: '',
     anio: 0,
     kilometraje: '0',
     calificacion: 0 // Asegúrate de ajustar estos valores según tu modelo real de Vehiculo
@@ -34,7 +33,7 @@ export class PagVehiculoComponent implements OnInit {
       this.vehiculoService.getvehiculo(params['codigo']).subscribe(data => {
         if(data){
           console.log('Vehiculo:',data);
-          this.vehiculo = data;
+          this.vehiculo = data.data;
         }
         if (!this.vehiculo) {
           console.error('Vehículo no encontrado');
@@ -67,7 +66,7 @@ export class PagVehiculoComponent implements OnInit {
       console.log('Guardando cambios...', this.vehiculo);
       this.vehiculoService.actualizarVehiculo(this.vehiculo).subscribe({
         next: (data) => {
-          console.log('Vehículo actualizado', data);
+          console.log('Vehículo actualizado', this.vehiculo);
           alert('Vehículo actualizado');
           this.toggleModoEditar(); // Salir del modo de edición
           this.router.navigate(['/vehiculos']);

@@ -26,7 +26,6 @@ export class PagVehiculoRegistroComponent implements OnInit {
       "marca": [],
       "modelo": [],
       "anio": [],
-      "color": [],
       "kilometraje": [],
       "precio": [],
       "calificacion": []
@@ -38,7 +37,13 @@ export class PagVehiculoRegistroComponent implements OnInit {
 
   guardar(){
     let vehiculo:Vehiculo = {...this.formulario.value};
-    this.vehiculoServicio.addvehiculo(vehiculo);
+    this.vehiculoServicio.addvehiculo(vehiculo).subscribe(data =>{
+      console.log('Data:',data);
+      if (!data){
+        alert('Error al guardar');
+        return;
+      }
+    });
     console.log('Formulario',this.formulario.value);
     this.router.navigate(['/vehiculos']);
   }

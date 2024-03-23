@@ -38,15 +38,6 @@
         </div>
 
         <div class="mb-3 row">
-          <label for="inputColor" class="col-sm-2 col-form-label">Color:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputColor" [ngModel]="vehiculo?.color" (ngModelChange)="vehiculo!.color = $event" *ngIf="modoEditar">
-            <span *ngIf="!modoEditar">{{vehiculo?.color}}</span>
-          </div>
-        </div>
-
-
-        <div class="mb-3 row">
           <label for="inputAnio" class="col-sm-2 col-form-label">Año:</label>
           <div class="col-sm-10">
             <input type="text" class="form-control" id="inputAnio" [ngModel]="vehiculo?.anio"  (ngModelChange)="vehiculo!.anio = $event" *ngIf="modoEditar">
