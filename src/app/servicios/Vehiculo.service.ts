@@ -11,7 +11,7 @@ constructor() { }
 
 getVehiculos(filtro:any):Observable<Array<Vehiculo>>{
   const escucha: Observable<Array<Vehiculo>> = new Observable(escuchando =>{
-  let lista = this.listaVehiculos.filter( elem => elem.marca.includes(filtro))
+  let lista = this.listaVehiculos.filter( elem => elem.marca.toLowerCase().includes(filtro.toLowerCase()))
     escuchando.next(lista);
   });
   return escucha;
