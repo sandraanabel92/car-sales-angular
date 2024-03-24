@@ -1,6 +1,6 @@
 <!-- Componente CalificacionComponent -->
 <div *ngIf="!modoEditar" (click)="select()">
-  <span *ngFor="let star of [].constructor(calificacion || 0); let i = index">★</span>
+  <span *ngFor="let star of estrellas">&#9733;</span>
+  <!-- Usa &#9734; para estrellas no sólidas -->
 </div>
-<input *ngIf="modoEditar" type="number" [(ngModel)]="calificacion" (change)="accionClick.emit(calificacion)" class="form-control" />
-
+<input *ngIf="modoEditar" type="number" [(ngModel)]="calificacion"  (change)="accionClick.emit(calificacion)" class="form-control" />

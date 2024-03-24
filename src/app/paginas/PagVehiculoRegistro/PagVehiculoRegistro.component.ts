@@ -28,7 +28,8 @@ export class PagVehiculoRegistroComponent implements OnInit {
       "anio": [],
       "kilometraje": [],
       "precio": [],
-      "calificacion": []
+      "calificacion": [],
+      "foto":""
     });
   }
 

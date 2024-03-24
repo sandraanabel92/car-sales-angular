@@ -15,4 +15,8 @@ export class CalificacionComponent {
   select() {
     this.accionClick.emit(this.calificacion);
   }
+
+  get estrellas(): Array<number> {
+    return new Array(this.calificacion);
+  }
 }

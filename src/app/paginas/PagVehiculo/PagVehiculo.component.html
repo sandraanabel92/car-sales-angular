@@ -1,75 +1,115 @@
 <div class="card">
-  <div class="card-header">
-   VEHICULO {{vehiculo?.marca}} {{vehiculo?.modelo}}
+  <div class="card-header bg-primary text-white">
+    VEHÍCULO {{ vehiculo?.marca }} {{ vehiculo?.modelo }}
   </div>
   <div class="card-body">
     <div class="row">
-      <div class="col-5">
-        <img src="{{vehiculo?.foto}}" class="img-thumbnail">
+      <!-- Imagen del vehículo -->
+      <div class="col-lg-4 col-md-5 col-sm-12 mb-3">
+        <img src="{{ vehiculo?.foto }}" class="img-thumbnail w-100">
       </div>
-      <div class="col-1">
-
-      </div>
-      <div class="col-6">
-
+      <!-- Detalles del vehículo -->
+      <div class="col-lg-8 col-md-7 col-sm-12">
+        <!-- Código -->
         <div class="mb-3 row">
-          <label for="staticCodigo" class="col-sm-2 col-form-label" id="staticCodigo">Codigo:</label>
-        <div class="col-sm-10">
-          {{vehiculo?.codigo}}
+          <label for="vehiculo_codigo" id="vehiculo_codigo" class="col-md-3 col-sm-4 col-form-label">Código:</label>
+          <div class="col-md-9 col-sm-8">
+            <span>{{ vehiculo?.codigo }}</span>
+          </div>
         </div>
-        </div>
-
+        <!-- Marca -->
         <div class="mb-3 row">
-          <label for="inputMarca" class="col-sm-2 col-form-label">Marca:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputMarca"
-                   [ngModel]="vehiculo?.marca" (ngModelChange)="vehiculo!.marca = $event" *ngIf="modoEditar">
-            <span *ngIf="!modoEditar">{{vehiculo?.marca}}</span>
+          <label for="inputMarca" class="col-md-3 col-sm-4 col-form-label">Marca:</label>
+          <div class="col-md-9 col-sm-8">
+            <input type="text" class="form-control" id="inputMarca" [ngModel]="vehiculo?.marca"
+                   [class.is-invalid]="esMarcaInvalida"
+                   (ngModelChange)="vehiculo!.marca = $event; validarCampos()" *ngIf="modoEditar">
+            <div *ngIf="esMarcaInvalida" class="invalid-feedback animation-class">
+              La marca es requerida
+            </div>
+            <span *ngIf="!modoEditar">{{ vehiculo?.marca }}</span>
+          </div>
+        </div>
+        <!-- Modelo -->
+        <div class="mb-3 row">
+          <label for="inputModelo" class="col-md-3 col-sm-4 col-form-label">Modelo:</label>
+          <div class="col-md-9 col-sm-8">
+            <input type="text" class="form-control" id="inputModelo" [ngModel]="vehiculo?.modelo"
+                   [class.is-invalid]="esModeloInvalido"
+                   (ngModelChange)="vehiculo.modelo = $event; validarCampos()" *ngIf="modoEditar">
+            <div *ngIf="esModeloInvalido" class="invalid-feedback animation-class">
+              El modelo es requerido
+            </div>
+            <span *ngIf="!modoEditar">{{ vehiculo?.modelo }}</span>
+          </div>
+        </div>
+        <!-- Año -->
+        <div class="mb-3 row">
+          <label for="inputAnio" class="col-md-3 col-sm-4 col-form-label">Año:</label>
+          <div class="col-md-9 col-sm-8">
+            <input type="text" class="form-control" [class.is-invalid]="esAnioInvalido" id="inputAnio"
+                   [(ngModel)]="vehiculo.anio" (ngModelChange)="vehiculo.anio = $event; validarCampos()"
+                   *ngIf="modoEditar">
+            <div *ngIf="esAnioInvalido" class="invalid-feedback animation-class">
+              El Año es requerido y debe ser un número
+            </div>
+            <span *ngIf="!modoEditar">{{ vehiculo?.anio }}</span>
+          </div>
+        </div>
+        <!-- Kilometraje -->
+        <div class="mb-3 row">
+          <label for="inputkilometraje" class="col-md-3 col-sm-4 col-form-label">Kilometraje:</label>
+          <div class="col-md-9 col-sm-8">
+            <input type="text" class="form-control" [class.is-invalid]="esKilometrajeInvalido"
+                   id="inputkilometraje" [(ngModel)]="vehiculo.kilometraje"
+                   (ngModelChange)="vehiculo.kilometraje=$event; validarCampos()" *ngIf="modoEditar">
+            <div *ngIf="esKilometrajeInvalido" class="invalid-feedback animation-class">
+              El Kilometraje es requerido y debe ser un número
+            </div>
+            <span *ngIf="!modoEditar">{{ vehiculo?.kilometraje }}</span>
+          </div>
+        </div>
+        <!-- Precio -->
+        <div class="mb-3 row">
+          <label for="inputPrecio" class="col-md-3 col-sm-4 col-form-label">Precio:</label>
+          <div class="col-md-9 col-sm-8">
+            <input type="text" class="form-control" [class.is-invalid]="esPrecioInvalido" id="inputPrecio"
+                   [(ngModel)]="vehiculo.precio" (ngModelChange)="vehiculo.precio=$event; validarCampos()"
+                   *ngIf="modoEditar">
+            <div *ngIf="esPrecioInvalido" class="invalid-feedback animation-class">
+              El Precio es requerido y debe ser un número con dos decimales
+            </div>
+            <span *ngIf="!modoEditar">{{ vehiculo?.precio | currency }}</span>
           </div>
         </div>
 
+        <!-- Foto -->
         <div class="mb-3 row">
-          <label for="inputModelo" class="col-sm-2 col-form-label">Modelo:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputModelo"
-                   [ngModel]="vehiculo?.modelo" (ngModelChange)="vehiculo!.modelo = $event" *ngIf="modoEditar">
-            <span *ngIf="!modoEditar">{{vehiculo?.modelo}}</span>
+          <label for="inputFoto" class="col-md-3 col-sm-4 col-form-label">Foto:</label>
+          <div class="col-md-9 col-sm-8">
+            <input type="url" class="form-control" id="inputFoto" [ngModel]="vehiculo?.foto"
+                   (ngModelChange)="vehiculo.foto=$event" *ngIf="modoEditar">
+            <span *ngIf="!modoEditar">{{ vehiculo?.foto }}</span>
           </div>
         </div>
 
+        <!-- Calificación -->
         <div class="mb-3 row">
-          <label for="inputAnio" class="col-sm-2 col-form-label">Año:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputAnio" [ngModel]="vehiculo?.anio"  (ngModelChange)="vehiculo!.anio = $event" *ngIf="modoEditar">
-            <span *ngIf="!modoEditar">{{vehiculo?.anio}}</span>
+          <label for="labelCalificacion" id="labelCalificacion"
+                 class="col-md-3 col-sm-4 col-form-label">Calificación:</label>
+          <div class="col-md-9 col-sm-8">
+            <app-calificacion [calificacion]="vehiculo?.calificacion || 0" [modoEditar]="modoEditar"
+                              (accionClick)="imprimir($event)"></app-calificacion>
           </div>
         </div>
-
-        <div class="mb-3 row">
-          <label for="inputkilometraje" class="col-sm-2 col-form-label">Kilometraje:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputkilometraje" [ngModel]="vehiculo?.kilometraje" (ngModelChange)="vehiculo!.kilometraje = $event" *ngIf="modoEditar">
-            <span *ngIf="!modoEditar">{{vehiculo?.kilometraje}}</span>
-          </div>
-        </div>
-
-        <div class="mb-3 row">
-          <label for="inputPrecio" class="col-sm-2 col-form-label">Precio:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="inputPrecio" [ngModel]="vehiculo?.precio" (ngModelChange)="vehiculo!.precio = $event" *ngIf="modoEditar">
-            <span *ngIf="!modoEditar">{{vehiculo?.precio}}</span>
-          </div>
-        </div>
-
-        <div class="mb-3 row">
-          <label for="labelCalificacion" id="labelCalificacion" class="col-sm-2 col-form-label">Calificacion:</label>
-          <div class="col-sm-10">
-            <app-calificacion [calificacion]="vehiculo?.calificacion || 0" [modoEditar]="modoEditar" (accionClick)="imprimir($event)"></app-calificacion>
+        <!-- Botones de acción -->
+        <div class="row">
+          <div class="col-12 d-flex justify-content-end">
+            <button class="btn btn-secondary me-2" (click)="toggleModoEditar()" *ngIf="!modoEditar">Editar</button>
+            <button class="btn btn-success" (click)="guardarCambios()" *ngIf="modoEditar">Guardar Cambios</button>
           </div>
         </div>
       </div>
     </div>
-    <button class="btn btn-primary" (click)="toggleModoEditar()" *ngIf="!modoEditar">Editar</button>
-    <button class="btn btn-success" (click)="guardarCambios()" *ngIf="modoEditar">Guardar Cambios</button>
   </div>
 </div>

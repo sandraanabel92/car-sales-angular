@@ -14,10 +14,9 @@ export class PagListaVehiculosComponent implements OnInit {
   private _filtro:string = "";
   @Input() valor:string ='';
   listaVehiculos:Array<Vehiculo> = [];
-  vehiculosPorPagina: number = 5; // Número inicial de filas por página
   paginaActual: number = 1;
-  totalVehiculos: number = 0; // Asumiendo que esta propiedad se actualiza con la respuesta del backend
   numeroPaginas: number = 0;
+  vehiculosPorPagina: number = 5;
 
 
   constructor(
@@ -45,7 +44,7 @@ export class PagListaVehiculosComponent implements OnInit {
   }
 
   consultaVehiculos(){
-    this.vehiculoService.getVehiculos(this.paginaActual, 5,this.filtro).subscribe(valor =>{
+    this.vehiculoService.getVehiculos(this.paginaActual, this.vehiculosPorPagina,this.filtro).subscribe(valor =>{
       console.log('Valor:',valor);
       console.log('DATA:',valor.data);
       this.numeroPaginas = valor.pages;
@@ -86,5 +85,11 @@ export class PagListaVehiculosComponent implements OnInit {
     // Aquí deberías llamar a la función que actualiza la lista de vehículos
     this.consultaVehiculos();
   }
+
+  cambiarFilasPorPagina() {
+    this.paginaActual = 1; // Resetea a la primera página
+    this.consultaVehiculos();
+  }
+
 
 }
