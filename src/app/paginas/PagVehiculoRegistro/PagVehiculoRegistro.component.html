@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-   REGISTRO DE NUEVO VEHICULO
+    REGISTRO DE NUEVO VEHICULO
   </div>
   <div class="card-body">
     <div class="row">
@@ -9,69 +9,112 @@
         <form [formGroup]="formulario">
           <div class="mb-3 row">
             <label for="vehiculo_codigo" class="col-sm-2 col-form-label">Codigo:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="vehiculo_codigo" name="codigo" formControlName="codigo" >
-          </div>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="vehiculo_codigo" name="codigo" formControlName="codigo"
+                     [class.is-invalid]="formulario.controls['codigo'].invalid && formulario.controls['codigo'].touched">
+              <div *ngIf="formulario.controls['codigo'].errors && formulario.controls['codigo'].touched"
+                   class="invalid-feedback">
+                El código es requerido.
+              </div>
+            </div>
           </div>
 
           <div class="mb-3 row">
             <label for="vehiculo_marca" class="col-sm-2 col-form-label">Marca:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="vehiculo_marca" name="marca" formControlName="marca" >
-          </div>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="vehiculo_marca" formControlName="marca"
+                     [class.is-invalid]="formulario.controls['marca'].invalid && formulario.controls['marca'].touched">
+              <div *ngIf="formulario.controls['marca'].errors && formulario.controls['marca'].touched"
+                   class="invalid-feedback">
+                La marca es requerida.
+              </div>
+            </div>
           </div>
 
           <div class="mb-3 row">
             <label for="vehiculo_modelo" class="col-sm-2 col-form-label">Modelo:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="vehiculo_modelo" name="modelo" formControlName="modelo" >
-          </div>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="vehiculo_modelo" name="modelo" formControlName="modelo"
+                     [class.is-invalid]="formulario.controls['modelo'].invalid && formulario.controls['modelo'].touched">
+              <div *ngIf="formulario.controls['modelo'].errors && formulario.controls['modelo'].touched"
+                   class="invalid-feedback">
+                El modelo es requerida.
+              </div>
+            </div>
           </div>
 
           <div class="mb-3 row">
             <label for="vehiculo_anio" class="col-sm-2 col-form-label">Año:</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="vehiculo_anio" name="anio" formControlName="anio" >
-          </div>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="vehiculo_anio" name="anio" formControlName="anio"
+                     [class.is-invalid]="formulario.controls['anio'].invalid && formulario.controls['anio'].touched">
+              <div *ngIf="formulario.controls['anio'].errors && formulario.controls['anio'].touched"
+                   class="invalid-feedback">
+                El Año es requerida.
+              </div>
+            </div>
           </div>
 
           <div class="mb-3 row">
             <label for="vehiculo_kilometraje" class="col-sm-2 col-form-label">Kilometraje:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="vehiculo_kilometraje" name="kilometraje" formControlName="kilometraje">
-          </div>
+              <input type="text" class="form-control" id="vehiculo_kilometraje" name="kilometraje"
+                     formControlName="kilometraje"
+                     [class.is-invalid]="formulario.controls['kilometraje'].invalid && formulario.controls['kilometraje'].touched">
+              <div *ngIf="formulario.controls['kilometraje'].errors && formulario.controls['kilometraje'].touched"
+                   class="invalid-feedback">
+                El Kilometraje es requerido y debe ser un número.
+              </div>
+            </div>
           </div>
 
           <div class="mb-3 row">
             <label for="vehiculo_precio" class="col-sm-2 col-form-label">Precio:</label>
-          <div class="col-sm-10">
-            <input type="number" class="form-control" id="vehiculo_precio" name="precio" formControlName="precio">
-          </div>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="vehiculo_precio" name="precio" formControlName="precio"
+                     [class.is-invalid]="formulario.controls['precio'].invalid && formulario.controls['precio'].touched">
+              <div *ngIf="formulario.controls['precio'].errors && formulario.controls['precio'].touched"
+                   class="invalid-feedback">
+                El precio es requerido y debe cumplir con el siguiente formato ejemplo: (10.00), debe ser un decimal con
+                2 dígitos.
+              </div>
+            </div>
           </div>
 
           <div class="mb-3 row">
             <label for="vehiculo_imagen" class="col-sm-2 col-form-label">Imagen URL:</label>
             <div class="col-sm-10">
-              <input type="url" class="form-control" id="vehiculo_imagen" name="foto" formControlName="foto" >
+              <input type="url" class="form-control" id="vehiculo_imagen" name="foto" formControlName="foto"
+                     [class.is-invalid]="formulario.controls['foto'].invalid && formulario.controls['foto'].touched">
+              <div *ngIf="formulario.controls['foto'].errors && formulario.controls['foto'].touched"
+                   class="invalid-feedback">
+                La foto es requerida o no cumple con el formato de URL ("http://example/image").
+              </div>
             </div>
           </div>
 
 
           <div class="mb-3 row">
             <label for="vehiculo_calificacion" class="col-sm-2 col-form-label">Calificacion:</label>
-          <div class="col-sm-10">
-            <input type="number" class="form-control" id="vehiculo_calificacion" name="calificacion" formControlName="calificacion" >
-          </div>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" id="vehiculo_calificacion" name="calificacion"
+                     formControlName="calificacion"
+                     [class.is-invalid]="formulario.controls['calificacion'].invalid && formulario.controls['calificacion'].touched">
+              <div *ngIf="formulario.controls['calificacion'].errors && formulario.controls['calificacion'].touched"
+                   class="invalid-feedback">
+                La calificación es requerida y debe ser un número del 1 al 5.
+              </div>
+            </div>
           </div>
         </form>
       </div>
-   </div>
-   <br>
-   <div class="row">
-    <div class="col-2">
-      <button class="btn btn-info" (click)="guardar()">GUARDAR</button>
     </div>
     <br>
-   </div>
+    <div class="row">
+      <div class="col-2">
+        <button class="btn btn-info" (click)="guardar()">GUARDAR</button>
+      </div>
+      <br>
+    </div>
   </div>
 </div>
