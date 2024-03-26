@@ -1,6 +1,14 @@
-# CarSalesAngular
+# PROYECTO CarSales Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
+
+# Autora
+### Nombre:
+Sandra Anabel Palacios Abad 
+### e-mail: 
+sandraanabel21@gmail.com
+
+#####################################################################
 
 ## Development server
 
