@@ -57,6 +57,9 @@ export class PagVehiculoComponent implements OnInit {
 
     console.log('Vehículo:', this.modoEditar);
   }
+  goToVehiclesList() {
+    this.router.navigate(['/vehiculos']);
+  }
 
   imprimir(data: any) {
     console.log('Calificacion:', data)

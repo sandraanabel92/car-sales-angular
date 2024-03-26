@@ -10,36 +10,60 @@
           <div class="mb-3 row">
             <label for="inputId" class="col-sm-2 col-form-label">ID:</label>
             <div class="col-sm-10">
-              <input type="number" class="form-control" id="inputId" name="inputId" formControlName="id" >
-
+              <input type="number" class="form-control" id="inputId" name="inputId" formControlName="id"
+                [class.is-invalid]="formulario.controls['id'].invalid && formulario.controls['id'].touched">
+              <div *ngIf="formulario.controls['id'].errors && formulario.controls['id'].touched"
+                class="invalid-feedback">
+                El id es requerido.
+              </div>
             </div>
           </div>
 
           <div class="mb-3 row">
             <label for="inputNombre" class="col-sm-2 col-form-label">Nombre:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputNombre" name="inputNombre" formControlName="nombre" >
+              <input type="text" class="form-control" id="inputNombre" name="inputNombre" formControlName="nombre"
+                [class.is-invalid]="formulario.controls['nombre'].invalid && formulario.controls['nombre'].touched">
+              <div *ngIf="formulario.controls['nombre'].errors && formulario.controls['nombre'].touched"
+                class="invalid-feedback">
+                El nombre es requerido.
+
+              </div>
             </div>
           </div>
 
           <div class="mb-3 row">
             <label for="inputApellido" class="col-sm-2 col-form-label">Apellido:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputApellido" name="inputApellido" formControlName="apellido" >
+              <input type="text" class="form-control" id="inputApellido" name="inputApellido" formControlName="apellido"
+                [class.is-invalid]="formulario.controls['apellido'].invalid && formulario.controls['apellido'].touched">
+              <div *ngIf="formulario.controls['apellido'].errors && formulario.controls['apellido'].touched"
+                class="invalid-feedback">
+                El apellido es requerido.
+
+              </div>
             </div>
           </div>
 
           <div class="mb-3 row">
             <label for="inputPassword" class="col-sm-2 col-form-label">Password:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputPassword" name="inputPassword" formControlName="password" >
+              <input type="password" class="form-control" id="inputPassword" name="inputPassword"
+                formControlName="password"
+                [class.is-invalid]="formulario.controls['password'].invalid && formulario.controls['password'].touched">
+              <div *ngIf="formulario.controls['password'].errors && formulario.controls['apellido'].touched"
+                class="invalid-feedback">
+                El password es requerido.
+
+              </div>
             </div>
           </div>
 
           <div class="mb-3 row">
             <label for="inputTelefono" class="col-sm-2 col-form-label">Teléfono:</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="inputTelefono" name="inputTelefono" formControlName="telefono">
+              <input type="text" class="form-control" id="inputTelefono" name="inputTelefono"
+                formControlName="telefono">
             </div>
           </div>
 
